@@ -18,22 +18,35 @@ const autoscroll = () => {
 }
 
 socket.on('message', (msg) => {
-    console.log(msg)
+    var sender = decodeURIComponent(window.location.search.match(/(\?|&)username\=([^&]*)/)[2]).toLowerCase()
+    //console.log(msg)
+    var styleClass = 'message__receiver'
+    if(msg.username == sender) {
+        styleClass = 'message__sender'
+    }
     const html = Mustache.render(messageTemplate, {
         username: msg.username,
         message: msg.text,
-        createdAt: moment(msg.createdAt).format('h:mm a')
+        createdAt: moment(msg.createdAt).format('h:mm a'),
+        class: styleClass
     })
     $messages.insertAdjacentHTML('beforeend', html)
     autoscroll()
 })
 
 socket.on('locationMessage', (url) => {
-    console.log(url)
+    //console.log(url)
+    var sender = decodeURIComponent(window.location.search.match(/(\?|&)username\=([^&]*)/)[2]).toLowerCase()
+    
+    var styleClass = 'message__receiver'
+    if(url.username == sender) {
+        styleClass = 'message__sender'
+    }
     const html = Mustache.render(locationTemplate, {
         username: url.username,
         url: url.url,
-        createdAt: moment(url.createdAt).format('h:mm a')
+        createdAt: moment(url.createdAt).format('h:mm a'),
+        class: styleClass
     })
     $messages.insertAdjacentHTML('beforeend', html)
     autoscroll()

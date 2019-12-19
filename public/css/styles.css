@@ -87,6 +87,7 @@ button:disabled {
 
 .chat {
     display: flex;
+    flex-direction: row;
 }
 
 .chat__sidebar {
@@ -94,7 +95,7 @@ button:disabled {
     color: white;
     background: #333744;
     width: 225px;
-    overflow-y: scroll
+    /* overflow-y: scroll; */
 }
 
 /* Chat styles */
@@ -116,21 +117,62 @@ button:disabled {
 
 .message {
     margin-bottom: 16px;   
+    width: 100%;
 }
 
 .message__name {
     font-weight: 600;
     font-size: 14px;
     margin-right: 8px;
+    text-transform: capitalize; 
+    float: left;
 }
 
 .message__meta {
-    color: #777;
+    color: white;
     font-size: 14px;
+    float: right;
 }
 
-.message a {
-    color: #0070CC;
+.message__sender {
+    margin-bottom: 16px;   
+    text-align: right;
+    width: 100%;
+}
+
+.message__sender a {
+    color: white;
+    text-decoration: underline;
+}
+
+.message__sender .user-chat{
+    background-color: #0a3d62;
+    display: inline-block;
+    padding: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    color: white !important
+}
+
+.message__receiver {
+    margin-bottom: 16px;   
+    width: 100%;
+}
+
+.message__receiver a {
+    color: white;
+    text-decoration: underline;
+}
+
+.message__receiver .user-chat{
+    background-color: #079992;
+    display: inline-block;
+    padding: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    color: white
 }
 
 /* Message Composition Styles */
@@ -140,6 +182,7 @@ button:disabled {
     flex-shrink: 0;
     margin-top: 16px;
     padding: 24px;
+    background-color: white;
 }
 
 .compose form {
@@ -177,7 +220,20 @@ button:disabled {
 }
 
 .users {
-    list-style-type: none;
-    font-weight: 300;
+    list-style: none;
+    font-weight: 400;
     padding: 12px 24px 0 24px;
+}
+
+.users li {
+    text-transform: capitalize;
+}
+
+ul li::before {
+    content: "\2022";
+    color: green;
+    font-weight: bold;
+    display: inline-block;
+    width: 20px;
+    margin-left: 10px
 }
